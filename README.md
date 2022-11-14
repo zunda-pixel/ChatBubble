@@ -40,3 +40,7 @@ struct RawChatBubble: PreviewProvider {
   }
 }
 ```
+
+## 参考にしたもの
+
+https://qiita.com/yuppejp/items/92429a0fc8440f9da487
