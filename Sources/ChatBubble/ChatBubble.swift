@@ -11,7 +11,7 @@ public struct ChatBubble: Shape {
     Path { path in
       let tailSize = cornerRadius / 2
       
-      // 左上角丸
+      // leading top corner
       path.addArc(
         center: CGPoint(
           x: rect.minX + cornerRadius,
@@ -23,7 +23,7 @@ public struct ChatBubble: Shape {
         clockwise: false
       )
       
-      // 右上角丸
+      // trailing top corner
       path.addArc(
         center: CGPoint(
           x: rect.maxX - cornerRadius,
@@ -35,7 +35,7 @@ public struct ChatBubble: Shape {
         clockwise: false
       )
       
-      // しっぽ上部
+      // tail top
       path.addQuadCurve(
         to: CGPoint(
           x: rect.maxX + tailSize,
@@ -47,7 +47,7 @@ public struct ChatBubble: Shape {
         )
       )
       
-      // しっぽ下部
+      // tail bottom
       path.addQuadCurve(
         to: CGPoint(
           x: rect.maxX,
@@ -59,7 +59,7 @@ public struct ChatBubble: Shape {
         )
       )
       
-      // 右下角丸
+      // trailing bottom corner
       path.addArc(
         center: CGPoint(
           x: rect.maxX - cornerRadius,
@@ -71,7 +71,7 @@ public struct ChatBubble: Shape {
         clockwise: false
       )
       
-      // 左下角丸
+      // leading bottom corner
       path.addArc(
         center: CGPoint(
           x: rect.minX + cornerRadius,
@@ -98,7 +98,7 @@ extension View {
       .padding(position.isLeading ? .leading : .trailing, cornerRadius / 2)
   }
   
-  func rotateChatBubble(position: ChatBubble.TailPosition) -> some View {
+  public func rotateChatBubble(position: ChatBubble.TailPosition) -> some View {
     switch position {
     case .trailingTop:
       return self.rotation3DEffect(.init(degrees: 180), axis: (0, 0, 0))
