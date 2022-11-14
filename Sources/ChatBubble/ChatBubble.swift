@@ -86,8 +86,6 @@ public struct ChatBubble: Shape {
   }
 }
 
-
-
 extension View {
   public func chatBubble(direction: ChatBubble.Direction, cornerRadius: Double, color: Color) -> some View {
     self
@@ -131,7 +129,7 @@ struct ChatBubble_Preview: PreviewProvider {
   ]
   
   static var previews: some View {
-    VStack {
+    ScrollView {
       ForEach(chats) { chat in
         HStack(alignment: .top) {
           if !chat.direction.isLeading {
@@ -139,6 +137,7 @@ struct ChatBubble_Preview: PreviewProvider {
           }
           
           Text(chat.text)
+            .fixedSize(horizontal: false, vertical: true)
             .chatBubble(
               direction: chat.direction,
               cornerRadius: 17,
