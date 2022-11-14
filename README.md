@@ -25,3 +25,18 @@ struct ShapePreview: PreviewProvider {
   }
 }
 ```
+
+```swift
+struct RawChatBubble: PreviewProvider {
+  static var previews: some View {
+    Text("Sample Text.")
+      .fixedSize(horizontal: false, vertical: true)
+      .padding()
+      .background {
+        ChatBubble(cornerRadius: 17)
+          .rotateChatBubble(position: .trailingBottom)
+          .foregroundColor(.red.opacity(0.5))
+      }
+  }
+}
+```
