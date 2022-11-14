@@ -22,8 +22,5 @@ let package = Package(
         .target(
             name: "ChatBubble",
             dependencies: []),
-        .testTarget(
-            name: "ChatBubbleTests",
-            dependencies: ["ChatBubble"]),
     ]
 )
