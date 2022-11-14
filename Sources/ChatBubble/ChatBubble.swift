@@ -38,7 +38,7 @@ public struct ChatBubble: Shape {
       // tail top
       path.addQuadCurve(
         to: CGPoint(
-          x: rect.maxX + tailSize,
+          x: rect.maxX + tailSize / 2,
           y: rect.minY
         ),
         control: CGPoint(
