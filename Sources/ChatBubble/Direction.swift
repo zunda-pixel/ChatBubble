@@ -3,7 +3,7 @@
 //
 
 extension ChatBubble {
-  public enum Direction {
+  public enum TailPosition {
     case trailingTop
     case trailingBottom
     case leadingTop

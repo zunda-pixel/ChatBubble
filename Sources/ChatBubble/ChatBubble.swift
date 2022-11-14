@@ -87,19 +87,19 @@ public struct ChatBubble: Shape {
 }
 
 extension View {
-  public func chatBubble(direction: ChatBubble.Direction, cornerRadius: Double, color: Color) -> some View {
+  public func chatBubble(position: ChatBubble.TailPosition, cornerRadius: Double, color: Color) -> some View {
     self
       .padding()
       .background {
         ChatBubble(cornerRadius: cornerRadius)
-          .rotateChatBubble(direction: direction)
+          .rotateChatBubble(position: position)
           .foregroundColor(color)
       }
-      .padding(direction.isLeading ? .leading : .trailing, cornerRadius / 2)
+      .padding(position.isLeading ? .leading : .trailing, cornerRadius / 2)
   }
   
-  func rotateChatBubble(direction: ChatBubble.Direction) -> some View {
-    switch direction {
+  func rotateChatBubble(position: ChatBubble.TailPosition) -> some View {
+    switch position {
     case .trailingTop:
       return self.rotation3DEffect(.init(degrees: 180), axis: (0, 0, 0))
     case .trailingBottom:
@@ -117,36 +117,36 @@ struct ChatBubble_Preview: PreviewProvider {
   struct Chat: Identifiable {
     let id = UUID()
     let text: String
-    let direction: ChatBubble.Direction
+    let position: ChatBubble.TailPosition
   }
   
   static let chats: [Chat] = [
-    .init(text: "In order to meet the deadline for delivery.", direction: .trailingTop),
-    .init(text: "The business results are above average.", direction: .leadingTop),
-    .init(text: "Handle phone calls.", direction: .leadingTop),
-    .init(text: "Notification of rescheduling of next week’s regular meeting.", direction: .trailingTop),
-    .init(text: "Request a customer to introduce other customers.", direction: .trailingTop),
+    .init(text: "In order to meet the deadline for delivery.", position: .trailingTop),
+    .init(text: "The business results are above average.", position: .leadingTop),
+    .init(text: "Handle phone calls.", position: .leadingTop),
+    .init(text: "Notification of rescheduling of next week’s regular meeting.", position: .trailingTop),
+    .init(text: "Request a customer to introduce other customers.", position: .trailingTop),
   ]
   
   static var previews: some View {
     ScrollView {
       ForEach(chats) { chat in
         HStack(alignment: .top) {
-          if !chat.direction.isLeading {
+          if !chat.position.isLeading {
             Spacer()
           }
           
           Text(chat.text)
             .fixedSize(horizontal: false, vertical: true)
             .chatBubble(
-              direction: chat.direction,
+              position: chat.position,
               cornerRadius: 17,
               color: .blue.opacity(0.5)
             )
-            .frame(maxWidth: 250, alignment: chat.direction.isLeading ? .leading : .trailing)
+            .frame(maxWidth: 250, alignment: chat.position.isLeading ? .leading : .trailing)
             //.border(.red)
           
-          if chat.direction.isLeading {
+          if chat.position.isLeading {
             Spacer()
           }
         }
@@ -168,7 +168,7 @@ struct SingleChatBubble: PreviewProvider {
     Text("Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world.")
       .fixedSize(horizontal: false, vertical: true)
       .chatBubble(
-        direction: .leadingTop,
+        position: .leadingTop,
         cornerRadius: 17,
         color: .blue.opacity(0.5)
       )
@@ -181,28 +181,28 @@ struct MultiDirectionChatBubble: PreviewProvider {
       Text("Sample Text.")
         .fixedSize(horizontal: false, vertical: true)
         .chatBubble(
-          direction: .leadingTop,
+          position: .leadingTop,
           cornerRadius: 17,
           color: .red.opacity(0.5)
         )
       Text("Sample Text.")
         .fixedSize(horizontal: false, vertical: true)
         .chatBubble(
-          direction: .leadingBottom,
+          position: .leadingBottom,
           cornerRadius: 17,
           color: .yellow.opacity(0.5)
         )
       Text("Sample Text.")
         .fixedSize(horizontal: false, vertical: true)
         .chatBubble(
-          direction: .trailingTop,
+          position: .trailingTop,
           cornerRadius: 17,
           color: .blue.opacity(0.5)
         )
       Text("Sample Text.")
         .fixedSize(horizontal: false, vertical: true)
         .chatBubble(
-          direction: .trailingBottom,
+          position: .trailingBottom,
           cornerRadius: 17,
           color: .green.opacity(0.5)
         )
