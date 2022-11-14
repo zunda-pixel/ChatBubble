@@ -155,13 +155,57 @@ struct ChatBubble_Preview: PreviewProvider {
   }
 }
 
+struct ShapePreview: PreviewProvider {
+  static var previews: some View {
+    ChatBubble(cornerRadius: 17)
+      .frame(width: 300, height: 100)
+      .foregroundColor(.cyan)
+  }
+}
+
 struct SingleChatBubble: PreviewProvider {
   static var previews: some View {
-    Text("Request a customer to introduce other customers. Request a customer to introduce other customers")
+    Text("Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world.")
+      .fixedSize(horizontal: false, vertical: true)
       .chatBubble(
         direction: .leadingTop,
         cornerRadius: 17,
         color: .blue.opacity(0.5)
       )
+  }
+}
+
+struct MultiDirectionChatBubble: PreviewProvider {
+  static var previews: some View {
+    ScrollView {
+      Text("Sample Text.")
+        .fixedSize(horizontal: false, vertical: true)
+        .chatBubble(
+          direction: .leadingTop,
+          cornerRadius: 17,
+          color: .red.opacity(0.5)
+        )
+      Text("Sample Text.")
+        .fixedSize(horizontal: false, vertical: true)
+        .chatBubble(
+          direction: .leadingBottom,
+          cornerRadius: 17,
+          color: .yellow.opacity(0.5)
+        )
+      Text("Sample Text.")
+        .fixedSize(horizontal: false, vertical: true)
+        .chatBubble(
+          direction: .trailingTop,
+          cornerRadius: 17,
+          color: .blue.opacity(0.5)
+        )
+      Text("Sample Text.")
+        .fixedSize(horizontal: false, vertical: true)
+        .chatBubble(
+          direction: .trailingBottom,
+          cornerRadius: 17,
+          color: .green.opacity(0.5)
+        )
+    }
   }
 }
