@@ -1,5 +1,5 @@
 //
-//  Direction.swift
+//  TailPosition.swift
 //
 
 extension ChatBubble {
