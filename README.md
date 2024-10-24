@@ -1,6 +1,9 @@
 # ChatBubble
 
-<img height="300" alt="スクリーンショット 2022-11-15 0 32 34" src="https://user-images.githubusercontent.com/47569369/201700410-c4035784-f678-4aa0-90e4-f7561f6a3893.png"><img height="300" alt="スクリーンショット 2022-11-15 0 47 58" src="https://user-images.githubusercontent.com/47569369/201703849-e02e919b-1916-49b2-9121-f6ecb7268df9.png">
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fzunda-pixel%2FChatBubble%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/zunda-pixel/ChatBubble)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fzunda-pixel%2FChatBubble%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/zunda-pixel/ChatBubble)
+
+<img height="300" alt="screenshot" src="https://user-images.githubusercontent.com/47569369/201700410-c4035784-f678-4aa0-90e4-f7561f6a3893.png"><img height="300" alt="screenshot" src="https://user-images.githubusercontent.com/47569369/201703849-e02e919b-1916-49b2-9121-f6ecb7268df9.png">
 
 ```swift
 struct SingleChatBubble: PreviewProvider {
