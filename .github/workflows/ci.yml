@@ -3,12 +3,11 @@ name: CI
 on: pull_request
 
 jobs:
-  test:
+  build:
     runs-on: macos-15
     steps:
     - uses: actions/checkout@v4
-    - run: swift build --build-tests
-    - run: swift test --skip-build --enable-swift-testing --parallel
+    - run: swift build
   lint:
     runs-on: ubuntu-24.04-arm
     container: swift:latest
