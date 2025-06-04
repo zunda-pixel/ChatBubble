@@ -12,7 +12,7 @@ struct SingleChatBubble: PreviewProvider {
       .fixedSize(horizontal: false, vertical: true)
       .chatBubble(
         direction: .leadingTop,
-        cornerRadius: 17,
+        cornerRadius: 18,
         color: .blue.opacity(0.5)
       )
   }
@@ -22,7 +22,7 @@ struct SingleChatBubble: PreviewProvider {
 ```swift
 struct ShapePreview: PreviewProvider {
   static var previews: some View {
-    ChatBubble(cornerRadius: 17)
+    ChatBubble(cornerRadius: 18)
       .frame(width: 300, height: 100)
       .foregroundColor(.cyan)
   }
@@ -36,7 +36,7 @@ struct RawChatBubble: PreviewProvider {
       .fixedSize(horizontal: false, vertical: true)
       .padding()
       .background {
-        ChatBubble(cornerRadius: 17)
+        ChatBubble(cornerRadius: 18)
           .rotateChatBubble(position: .trailingBottom)
           .foregroundColor(.red.opacity(0.5))
       }
