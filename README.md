@@ -6,40 +6,28 @@
 <img height="300" alt="screenshot" src="https://user-images.githubusercontent.com/47569369/201700410-c4035784-f678-4aa0-90e4-f7561f6a3893.png"><img height="300" alt="screenshot" src="https://user-images.githubusercontent.com/47569369/201703849-e02e919b-1916-49b2-9121-f6ecb7268df9.png">
 
 ```swift
-struct SingleChatBubble: PreviewProvider {
-  static var previews: some View {
-    Text("Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world.")
-      .fixedSize(horizontal: false, vertical: true)
-      .chatBubble(
-        direction: .leadingTop,
-        cornerRadius: 18,
-        color: .blue.opacity(0.5)
-      )
-  }
-}
+Text("Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world.")
+  .fixedSize(horizontal: false, vertical: true)
+  .chatBubble(
+    direction: .leadingTop,
+    cornerRadius: 18,
+    color: .blue.opacity(0.5)
+  )
 ```
 
 ```swift
-struct ShapePreview: PreviewProvider {
-  static var previews: some View {
+ChatBubble(cornerRadius: 18)
+  .frame(width: 300, height: 100)
+  .foregroundColor(.cyan)
+```
+
+```swift
+Text("Sample Text.")
+  .fixedSize(horizontal: false, vertical: true)
+  .padding(9)
+  .background {
     ChatBubble(cornerRadius: 18)
-      .frame(width: 300, height: 100)
-      .foregroundColor(.cyan)
+      .rotateChatBubble(position: .trailingBottom)
+      .foregroundColor(.red.opacity(0.5))
   }
-}
-```
-
-```swift
-struct RawChatBubble: PreviewProvider {
-  static var previews: some View {
-    Text("Sample Text.")
-      .fixedSize(horizontal: false, vertical: true)
-      .padding()
-      .background {
-        ChatBubble(cornerRadius: 18)
-          .rotateChatBubble(position: .trailingBottom)
-          .foregroundColor(.red.opacity(0.5))
-      }
-  }
-}
 ```
