@@ -1,7 +1,3 @@
-//
-//  TailPosition.swift
-//
-
 extension ChatBubble {
   public enum TailPosition {
     case trailingTop

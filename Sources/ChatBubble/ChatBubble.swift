@@ -112,15 +112,80 @@ extension View {
   }
 }
 
+#Preview {
+  ChatBubble(cornerRadius: 18)
+    .frame(width: 300, height: 100)
+    .foregroundColor(.cyan)
+}
 
-struct ChatBubble_Preview: PreviewProvider {
+#Preview {
+  Text("Sample Text.")
+    .fixedSize(horizontal: false, vertical: true)
+    .padding(8)
+    .background {
+      ChatBubble(cornerRadius: 18)
+        .rotateChatBubble(position: .trailingBottom)
+        .foregroundColor(.red.opacity(0.5))
+    }
+}
+
+#Preview {
+  Text("Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world.")
+    .fixedSize(horizontal: false, vertical: true)
+    .chatBubble(
+      position: .leadingTop,
+      cornerRadius: 18,
+      color: .blue.opacity(0.5)
+    )
+}
+
+#Preview {
+  ScrollView {
+    Text("Sample Text.")
+      .fixedSize(horizontal: false, vertical: true)
+      .chatBubble(
+        position: .leadingTop,
+        cornerRadius: 18,
+        color: .red.opacity(0.5)
+      )
+    Text("Sample Text.")
+      .fixedSize(horizontal: false, vertical: true)
+      .chatBubble(
+        position: .leadingBottom,
+        cornerRadius: 18,
+        color: .yellow.opacity(0.5)
+      )
+    Text("Sample Text.")
+      .fixedSize(horizontal: false, vertical: true)
+      .chatBubble(
+        position: .trailingTop,
+        cornerRadius: 18,
+        color: .blue.opacity(0.5)
+      )
+    Text("Sample Text.")
+      .fixedSize(horizontal: false, vertical: true)
+      .chatBubble(
+        position: .trailingBottom,
+        cornerRadius: 18,
+        color: .green.opacity(0.5)
+      )
+  }
+}
+
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, *)
+#Preview {
   struct Chat: Identifiable {
     let id = UUID()
     let text: String
     let position: ChatBubble.TailPosition
   }
   
-  static let chats: [Chat] = [
+  let chats: [Chat] = [
+    .init(text: "In order to meet the deadline for delivery.", position: .trailingTop),
+    .init(text: "The business results are above average.", position: .leadingTop),
+    .init(text: "Handle phone calls.", position: .leadingTop),
+    .init(text: "Notification of rescheduling of next week’s regular meeting.", position: .trailingTop),
+    .init(text: "Request a customer to introduce other customers.", position: .trailingTop),
     .init(text: "In order to meet the deadline for delivery.", position: .trailingTop),
     .init(text: "The business results are above average.", position: .leadingTop),
     .init(text: "Handle phone calls.", position: .leadingTop),
@@ -128,97 +193,33 @@ struct ChatBubble_Preview: PreviewProvider {
     .init(text: "Request a customer to introduce other customers.", position: .trailingTop),
   ]
   
-  static var previews: some View {
-    ScrollView {
-      ForEach(chats) { chat in
-        HStack(alignment: .top) {
-          if !chat.position.isLeading {
-            Spacer()
-          }
-          
-          Text(chat.text)
-            .fixedSize(horizontal: false, vertical: true)
-            .chatBubble(
-              position: chat.position,
-              cornerRadius: 17,
-              color: .blue.opacity(0.5)
-            )
-            .frame(maxWidth: 250, alignment: chat.position.isLeading ? .leading : .trailing)
-            //.border(.red)
-          
-          if chat.position.isLeading {
-            Spacer()
-          }
+  return NavigationStack {
+    List(chats) { chat in
+      HStack(alignment: .top) {
+        if !chat.position.isLeading {
+          Spacer()
+        }
+        
+        Text(chat.text)
+          .fixedSize(horizontal: false, vertical: true)
+          .chatBubble(
+            position: chat.position,
+            cornerRadius: 18,
+            color: .blue.opacity(0.5)
+          )
+          .frame(maxWidth: 250, alignment: chat.position.isLeading ? .leading : .trailing)
+
+        if chat.position.isLeading {
+          Spacer()
         }
       }
+      
+      .listRowSeparator(.hidden)
     }
-  }
-}
-
-struct ShapePreview: PreviewProvider {
-  static var previews: some View {
-    ChatBubble(cornerRadius: 17)
-      .frame(width: 300, height: 100)
-      .foregroundColor(.cyan)
-  }
-}
-
-struct SingleChatBubble: PreviewProvider {
-  static var previews: some View {
-    Text("Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world.")
-      .fixedSize(horizontal: false, vertical: true)
-      .chatBubble(
-        position: .leadingTop,
-        cornerRadius: 17,
-        color: .blue.opacity(0.5)
-      )
-  }
-}
-
-struct MultiDirectionChatBubble: PreviewProvider {
-  static var previews: some View {
-    ScrollView {
-      Text("Sample Text.")
-        .fixedSize(horizontal: false, vertical: true)
-        .chatBubble(
-          position: .leadingTop,
-          cornerRadius: 17,
-          color: .red.opacity(0.5)
-        )
-      Text("Sample Text.")
-        .fixedSize(horizontal: false, vertical: true)
-        .chatBubble(
-          position: .leadingBottom,
-          cornerRadius: 17,
-          color: .yellow.opacity(0.5)
-        )
-      Text("Sample Text.")
-        .fixedSize(horizontal: false, vertical: true)
-        .chatBubble(
-          position: .trailingTop,
-          cornerRadius: 17,
-          color: .blue.opacity(0.5)
-        )
-      Text("Sample Text.")
-        .fixedSize(horizontal: false, vertical: true)
-        .chatBubble(
-          position: .trailingBottom,
-          cornerRadius: 17,
-          color: .green.opacity(0.5)
-        )
-    }
-  }
-}
-
-struct RawChatBubble: PreviewProvider {
-  static var previews: some View {
-    Text("Sample Text.")
-      .fixedSize(horizontal: false, vertical: true)
-      .padding()
-      .background {
-        ChatBubble(cornerRadius: 17)
-          .rotateChatBubble(position: .trailingBottom)
-          .foregroundColor(.red.opacity(0.5))
-      }
+    .listStyle(.plain)
+    .navigationTitle("Chats")
+    #if !os(macOS)
+    .navigationBarTitleDisplayMode(.inline)
+    #endif
   }
 }
