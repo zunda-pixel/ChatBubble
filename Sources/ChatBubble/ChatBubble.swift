@@ -217,8 +217,9 @@ extension View {
           Spacer()
         }
       }
-
-      .listRowSeparator(.hidden)
+      #if os(iOS) || os(macOS)
+        .listRowSeparator(.hidden)
+      #endif
     }
     .listStyle(.plain)
     .navigationTitle("Chats")
