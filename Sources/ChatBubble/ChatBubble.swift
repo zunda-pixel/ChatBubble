@@ -178,7 +178,7 @@ extension View {
   }
 }
 
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, *)
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 #Preview {
   struct Chat: Identifiable {
     let id = UUID()
@@ -217,12 +217,13 @@ extension View {
           Spacer()
         }
       }
-
-      .listRowSeparator(.hidden)
+      #if os(iOS) || os(macOS)
+        .listRowSeparator(.hidden)
+      #endif
     }
     .listStyle(.plain)
     .navigationTitle("Chats")
-    #if !os(macOS)
+    #if os(iOS) || os(watchOS)
       .navigationBarTitleDisplayMode(.inline)
     #endif
   }
