@@ -2,15 +2,15 @@ import SwiftUI
 
 public struct ChatBubble: Shape {
   var cornerRadius: Double
-  
+
   public init(cornerRadius: Double) {
     self.cornerRadius = cornerRadius
   }
-  
+
   public func path(in rect: CGRect) -> Path {
     Path { path in
       let tailSize = cornerRadius / 2
-      
+
       // leading top corner
       path.addArc(
         center: CGPoint(
@@ -22,7 +22,7 @@ public struct ChatBubble: Shape {
         endAngle: Angle(degrees: 270),
         clockwise: false
       )
-      
+
       // trailing top corner
       path.addArc(
         center: CGPoint(
@@ -34,7 +34,7 @@ public struct ChatBubble: Shape {
         endAngle: Angle(degrees: 270 + 45),
         clockwise: false
       )
-      
+
       // tail top
       path.addQuadCurve(
         to: CGPoint(
@@ -46,7 +46,7 @@ public struct ChatBubble: Shape {
           y: rect.minY
         )
       )
-      
+
       // tail bottom
       path.addQuadCurve(
         to: CGPoint(
@@ -58,7 +58,7 @@ public struct ChatBubble: Shape {
           y: rect.minY + tailSize
         )
       )
-      
+
       // trailing bottom corner
       path.addArc(
         center: CGPoint(
@@ -70,7 +70,7 @@ public struct ChatBubble: Shape {
         endAngle: Angle(degrees: 90),
         clockwise: false
       )
-      
+
       // leading bottom corner
       path.addArc(
         center: CGPoint(
@@ -87,7 +87,11 @@ public struct ChatBubble: Shape {
 }
 
 extension View {
-  public func chatBubble(position: ChatBubble.TailPosition, cornerRadius: Double, color: Color) -> some View {
+  public func chatBubble(
+    position: ChatBubble.TailPosition,
+    cornerRadius: Double,
+    color: Color
+  ) -> some View {
     self
       .padding(cornerRadius / 2)
       .background {
@@ -97,7 +101,7 @@ extension View {
       }
       .padding(position.isLeading ? .leading : .trailing, cornerRadius / 2)
   }
-  
+
   public func rotateChatBubble(position: ChatBubble.TailPosition) -> some View {
     switch position {
     case .trailingTop:
@@ -130,13 +134,15 @@ extension View {
 }
 
 #Preview {
-  Text("Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world.")
-    .fixedSize(horizontal: false, vertical: true)
-    .chatBubble(
-      position: .leadingTop,
-      cornerRadius: 18,
-      color: .blue.opacity(0.5)
-    )
+  Text(
+    "Stanford Video Steve Jobs’ 2005 Stanford Commencement Address I am honored to be with you today at your commencement from one of the finest universities in the world."
+  )
+  .fixedSize(horizontal: false, vertical: true)
+  .chatBubble(
+    position: .leadingTop,
+    cornerRadius: 18,
+    color: .blue.opacity(0.5)
+  )
 }
 
 #Preview {
@@ -179,27 +185,25 @@ extension View {
     let text: String
     let position: ChatBubble.TailPosition
   }
-  
+
   let chats: [Chat] = [
     .init(text: "In order to meet the deadline for delivery.", position: .trailingTop),
     .init(text: "The business results are above average.", position: .leadingTop),
     .init(text: "Handle phone calls.", position: .leadingTop),
-    .init(text: "Notification of rescheduling of next week’s regular meeting.", position: .trailingTop),
     .init(text: "Request a customer to introduce other customers.", position: .trailingTop),
     .init(text: "In order to meet the deadline for delivery.", position: .trailingTop),
     .init(text: "The business results are above average.", position: .leadingTop),
     .init(text: "Handle phone calls.", position: .leadingTop),
-    .init(text: "Notification of rescheduling of next week’s regular meeting.", position: .trailingTop),
     .init(text: "Request a customer to introduce other customers.", position: .trailingTop),
   ]
-  
+
   return NavigationStack {
     List(chats) { chat in
       HStack(alignment: .top) {
         if !chat.position.isLeading {
           Spacer()
         }
-        
+
         Text(chat.text)
           .fixedSize(horizontal: false, vertical: true)
           .chatBubble(
@@ -213,13 +217,13 @@ extension View {
           Spacer()
         }
       }
-      
+
       .listRowSeparator(.hidden)
     }
     .listStyle(.plain)
     .navigationTitle("Chats")
     #if !os(macOS)
-    .navigationBarTitleDisplayMode(.inline)
+      .navigationBarTitleDisplayMode(.inline)
     #endif
   }
 }

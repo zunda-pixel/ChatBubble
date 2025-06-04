@@ -4,7 +4,7 @@ extension ChatBubble {
     case trailingBottom
     case leadingTop
     case leadingBottom
-    
+
     var isLeading: Bool {
       switch self {
       case .trailingTop:
