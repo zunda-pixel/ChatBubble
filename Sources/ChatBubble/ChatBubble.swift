@@ -89,7 +89,7 @@ public struct ChatBubble: Shape {
 extension View {
   public func chatBubble(position: ChatBubble.TailPosition, cornerRadius: Double, color: Color) -> some View {
     self
-      .padding()
+      .padding(cornerRadius / 2)
       .background {
         ChatBubble(cornerRadius: cornerRadius)
           .rotateChatBubble(position: position)
