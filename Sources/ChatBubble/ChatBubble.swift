@@ -223,7 +223,7 @@ extension View {
     }
     .listStyle(.plain)
     .navigationTitle("Chats")
-    #if !os(macOS)
+    #if os(iOS) || os(watchOS)
       .navigationBarTitleDisplayMode(.inline)
     #endif
   }
